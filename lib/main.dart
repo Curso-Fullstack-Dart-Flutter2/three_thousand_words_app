@@ -1,11 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:three_thousand_words/app/core/database/sqlite_adm_connection.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final sqliteAdmConnection = SqliteAdmConnection();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(sqliteAdmConnection);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(sqliteAdmConnection);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
