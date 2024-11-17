@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:three_thousand_words/app/core/database/sqlite_adm_connection.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -10,6 +11,9 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  final remoteConfig = FirebaseRemoteConfig.instance;
+  remoteConfig.fetchAndActivate();
 
   runApp(const MyApp());
 }
@@ -79,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: [
             const Text(
               'You have pushed the button this many times:',
             ),
