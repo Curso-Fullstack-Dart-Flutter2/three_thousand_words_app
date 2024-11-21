@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:three_thousand_words/app/core/database/sqlite_adm_connection.dart';
 import 'package:three_thousand_words/app/modules/auth/login/presentation/pages/login_page.dart';
+import 'package:three_thousand_words/app/modules/home/presentation/pages/home_page.dart';
+import 'package:three_thousand_words/app/modules/splash/presentation/pages/splash_page.dart';
 
 class ThreeThousandWordsApp extends StatefulWidget {
   const ThreeThousandWordsApp({super.key});
@@ -11,7 +13,6 @@ class ThreeThousandWordsApp extends StatefulWidget {
 }
 
 class _ThreeThousandWordsAppState extends State<ThreeThousandWordsApp> {
-
   final sqliteAdmConnection = SqliteAdmConnection();
 
   @override
@@ -27,9 +28,11 @@ class _ThreeThousandWordsAppState extends State<ThreeThousandWordsApp> {
     return MaterialApp(
       title: 'Three Thousand Words app',
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
+      initialRoute: '/splash',
       routes: {
-        '/': (context) => const LoginPage(),
+        '/login': (context) => const LoginPage(),
+        '/splash': (context) => const SplashPage(),
+        '/home': (context) => const HomePage(),
       },
     );
   }
