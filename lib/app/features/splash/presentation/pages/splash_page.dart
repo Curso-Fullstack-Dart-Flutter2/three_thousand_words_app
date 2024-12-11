@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:three_thousand_words/app/modules/splash/presentation/controller/splash_controller.dart';
+import 'package:three_thousand_words/app/features/splash/presentation/controller/splash_controller.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});

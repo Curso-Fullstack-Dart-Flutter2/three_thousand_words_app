@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:three_thousand_words/app/modules/auth/user/domain/repositories/user_repository.dart';
-import 'package:three_thousand_words/app/modules/auth/user/domain/usecases/user_usecase.dart';
+import 'package:three_thousand_words/app/features/auth/user/domain/repositories/user_repository.dart';
+import 'package:three_thousand_words/app/features/auth/user/domain/usecases/user_usecase.dart';
 
 class UserUsecaseImpl implements UserUsecase {
   final UserRepository _userRepository;

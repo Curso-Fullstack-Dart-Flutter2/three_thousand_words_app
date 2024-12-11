@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:three_thousand_words/app/modules/auth/login/data/datasource/login_datasource.dart';
-import 'package:three_thousand_words/app/modules/auth/login/domain/repository/login_repository.dart';
+import 'package:three_thousand_words/app/features/auth/login/data/datasource/login_datasource.dart';
+import 'package:three_thousand_words/app/features/auth/login/domain/repository/login_repository.dart';
 
 class LoginRepositoryImpl implements LoginRepository {
   final LoginDatasource _loginDatasource;

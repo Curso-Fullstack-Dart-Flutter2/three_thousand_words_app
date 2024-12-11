@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:three_thousand_words/app/modules/auth/login/data/datasource/login_datasource.dart';
+import 'package:three_thousand_words/app/features/auth/login/data/datasource/login_datasource.dart';
 
 class LoginDatasourceImpl implements LoginDatasource {
   @override

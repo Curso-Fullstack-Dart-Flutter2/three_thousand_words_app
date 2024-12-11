@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ThreeThousandWidget extends StatelessWidget {
+class ThreeThousandFormFieldWidget extends StatelessWidget {
   final String label;
   final IconButton? suffixIconButton;
   final bool obscureText;
@@ -9,7 +9,7 @@ class ThreeThousandWidget extends StatelessWidget {
   final FormFieldValidator<String>? validator;
   final FocusNode? focusnode;
 
-  const ThreeThousandWidget({
+  const ThreeThousandFormFieldWidget({
     super.key,
     required this.label,
     this.suffixIconButton,

@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:three_thousand_words/app/exceptions/auth_exception.dart';
-import 'package:three_thousand_words/app/modules/auth/user/data/datasourses/user_datasource.dart';
+import 'package:three_thousand_words/app/features/auth/user/data/datasourses/user_datasource.dart';
 
 class UserDatasourceImpl implements UserDatasource {
   final FirebaseAuth _firebaseAuth;
