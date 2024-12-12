@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:three_thousand_words/app/core/database/sqlite_adm_connection.dart';
 import 'package:three_thousand_words/app/core/ui/three_thousand_ui_config.dart';
 import 'package:three_thousand_words/app/features/auth/login/presentation/pages/login_page.dart';
+import 'package:three_thousand_words/app/features/auth/register/pages/register_page.dart';
 import 'package:three_thousand_words/app/features/home/presentation/pages/home_page.dart';
 import 'package:three_thousand_words/app/features/splash/presentation/pages/splash_page.dart';
 
@@ -32,8 +33,9 @@ class _ThreeThousandWordsAppState extends State<ThreeThousandWordsApp> {
       initialRoute: '/splash',
       theme: ThreeThousandUiConfig.theme,
       routes: {
-        '/login': (context) => const LoginPage(),
         '/splash': (context) => const SplashPage(),
+        '/login': (context) => const LoginPage(),
+        '/register': (context) => const RegisterPage(),
         '/home': (context) => const HomePage(),
       },
     );

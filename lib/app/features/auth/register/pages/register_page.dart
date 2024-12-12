@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:three_thousand_words/app/core/widgets/three_thousand_form_field_widget.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatelessWidget {
+  const RegisterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +25,14 @@ class LoginPage extends StatelessWidget {
                       Form(
                         child: Column(
                           children: [
+                            const ThreeThousandFormFieldWidget(label: 'nome'),
+                            const SizedBox(height: 20),
                             const ThreeThousandFormFieldWidget(label: 'email'),
                             const SizedBox(height: 20),
                             const ThreeThousandFormFieldWidget(label: 'senha'),
+                            const SizedBox(height: 20),
+                            const ThreeThousandFormFieldWidget(
+                                label: 'confirme a senha'),
                             const SizedBox(height: 20),
                             SizedBox(
                               width: MediaQuery.of(context).size.width,
@@ -49,20 +53,10 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 10),
-                      SignInButton(
-                        Buttons.Google,
-                        text: 'Entrar com o google',
-                        padding: const EdgeInsets.all(5),
-                        shape: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          borderSide: BorderSide.none,
-                        ),
-                        onPressed: () {},
-                      ),
                       TextButton(
-                        child: const Text('Não possui conta, cadastre-se'),
+                        child: const Text('Já possui conta? faça login'),
                         onPressed: () {
-                          Navigator.of(context).pushNamed('/register');
+                          Navigator.pop(context);
                         },
                       ),
                     ],
