@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:three_thousand_words/app/app_module.dart';
 import 'package:three_thousand_words/app/features/splash/presentation/controller/splash_controller.dart';
 
 class SplashPage extends StatefulWidget {
@@ -9,29 +12,28 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  late SplashController controller;
+  late final _controller = getIt<SplashController>();
+
+  StreamSubscription<bool>? _isLoggedSubscription;
 
   @override
   void initState() {
     super.initState();
+    _controller.initApp();
 
-    controller = SplashController();
-    controller.initApp();
-
-    Future.delayed(const Duration(seconds: 2), () {
-      controller.isLogged.stream.listen((isLogged) {
-        if (isLogged) {
-          Navigator.pushReplacementNamed(context, '/home');
-        } else {
-          Navigator.pushReplacementNamed(context, '/login');
-        }
-      });
+    _isLoggedSubscription = _controller.isLogged.stream.listen((isLogged) {
+      if (isLogged) {
+        Navigator.pushReplacementNamed(context, '/home');
+      } else {
+        Navigator.pushReplacementNamed(context, '/login');
+      }
     });
   }
 
   @override
   void dispose() {
-    controller.isLogged.close();
+    _isLoggedSubscription?.cancel();
+    _controller.isLogged.close();
     super.dispose();
   }
 

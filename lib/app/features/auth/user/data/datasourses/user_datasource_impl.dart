@@ -16,6 +16,8 @@ class UserDatasourceImpl implements UserDatasource {
       final userCredencial = await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
 
+      await _firebaseAuth.signOut();
+
       return userCredencial.user;
     } on FirebaseAuthException catch (error, stacktrace) {
       log('Error to register user on firebase auth',

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "384908406460",
+    "project_id": "threethousandwords-60cad",
+    "storage_bucket": "threethousandwords-60cad.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:384908406460:android:1a7e241645eeb72a90eab9",
+        "android_client_info": {
+          "package_name": "com.example.three_thousand_words"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmeNdKt2z9n45mWThBsspDgMshQCHiATo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
