@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:three_thousand_words/app/core/database/sqlite_adm_connection.dart';
 import 'package:three_thousand_words/app/core/ui/three_thousand_ui_config.dart';
@@ -20,8 +19,6 @@ class _ThreeThousandWordsAppState extends State<ThreeThousandWordsApp> {
   @override
   void initState() {
     super.initState();
-
-    FirebaseAuth auth = FirebaseAuth.instance;
     WidgetsBinding.instance.addObserver(sqliteAdmConnection);
   }
 

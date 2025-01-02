@@ -14,4 +14,11 @@ class UserUsecaseImpl implements UserUsecase {
 
     return result;
   }
+
+  @override
+  Future<User?> login(String email, String password) async {
+    final result = await _userRepository.login(email, password);
+
+    return result;
+  }
 }

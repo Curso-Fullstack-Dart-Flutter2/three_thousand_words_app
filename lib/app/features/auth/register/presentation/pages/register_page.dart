@@ -73,14 +73,14 @@ class _RegisterPageState extends State<RegisterPage> {
                     ]),
                   ),
                   const SizedBox(height: 20),
-                  StreamBuilder<bool>(
-                    stream: _controller.loadingStream,
-                    builder: (context, snapshot) {
-                      final isLoading = snapshot.data ?? false;
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: StreamBuilder<bool>(
+                      stream: _controller.loadingStream,
+                      builder: (context, snapshot) {
+                        final isLoading = snapshot.data ?? false;
 
-                      return SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        child: ElevatedButton(
+                        return ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
@@ -92,6 +92,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   final isFormValid =
                                       _formKey.currentState?.validate() ??
                                           false;
+
                                   if (isFormValid) {
                                     await _controller.register(
                                       email: _email.text,
@@ -123,9 +124,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                   padding: EdgeInsets.all(10),
                                   child: Text('Registrar'),
                                 ),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),
@@ -140,6 +141,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     style: const TextStyle(color: Colors.red),
                   );
                 }
+
                 return const SizedBox.shrink();
               },
             ),
