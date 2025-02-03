@@ -9,6 +9,8 @@ class LoginController {
   final _loadingController = BehaviorSubject<bool>();
   final _errorController = BehaviorSubject<String?>();
 
+  bool _isDisposed = false;
+
   Stream<bool> get loadingStream => _loadingController.stream;
   Stream<String?> get errorStream => _errorController.stream;
 
@@ -16,21 +18,24 @@ class LoginController {
       : _userUsecase = userUsecase;
 
   Future<void> login({required String email, required String password}) async {
+    if (_isDisposed) return;
+
     _loadingController.add(true);
     _errorController.add(null);
 
     try {
       await _userUsecase.login(email, password);
-      _loadingController.add(false);
+      if (!_isDisposed) _loadingController.add(false);
     } on Exception catch (error, stackTrace) {
       log('Error in controller to login user',
           error: error, stackTrace: stackTrace);
 
-      _errorController.add(error.toString());
+      if (!_isDisposed) _errorController.add(error.toString());
     }
   }
 
   void dispose() {
+    _isDisposed = true;
     _loadingController.close();
     _errorController.close();
   }

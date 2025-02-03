@@ -28,7 +28,7 @@ class _RegisterPageState extends State<RegisterPage> {
     _password.dispose();
     _confirmPassword.dispose();
 
-    _controller.dispose();
+    // _controller.dispose();
   }
 
   @override

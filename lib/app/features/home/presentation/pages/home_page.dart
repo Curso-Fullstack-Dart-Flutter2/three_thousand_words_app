@@ -1,8 +1,22 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+
+  @override
+  void initState() {
+    super.initState();
+    log('HomePage iniciada');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +28,9 @@ class HomePage extends StatelessWidget {
             icon: const Icon(Icons.logout),
             onPressed: () async {
               try {
-                // Realiza o logout
                 await FirebaseAuth.instance.signOut();
-                // Navega de volta para a tela de login
                 Navigator.pushReplacementNamed(context, '/login');
               } catch (e) {
-                // Exibe um erro caso ocorra
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text('Erro ao sair: $e')),
                 );

@@ -31,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
     _email.dispose();
     _password.dispose();
 
-    _controller.dispose();
+    // _controller.dispose();
   }
 
   @override
@@ -92,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                                             (_) {
                                               Navigator.of(context)
                                                   .pushNamedAndRemoveUntil(
-                                                '/login',
+                                                '/home',
                                                 (route) => false,
                                               );
                                             },
