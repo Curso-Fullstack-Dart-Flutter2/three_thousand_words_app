@@ -21,4 +21,18 @@ class UserUsecaseImpl implements UserUsecase {
 
     return result;
   }
+
+  @override
+  Future<User?> googleLogin() async {
+    final result = await _userRepository.googleLogin();
+
+    return result;
+  }
+
+  @override
+  Future<void> forgotPassword(String email) {
+    final result = _userRepository.forgotPassword(email);
+
+    return result;
+  }
 }

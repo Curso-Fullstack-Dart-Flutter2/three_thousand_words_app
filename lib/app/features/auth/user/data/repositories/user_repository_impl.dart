@@ -21,4 +21,18 @@ class UserRepositoryImpl implements UserRepository {
 
     return result;
   }
+
+  @override
+  Future<User?> googleLogin() async {
+    final result = await _userDatasource.googleLogin();
+
+    return result;
+  }
+  
+  @override
+  Future<void> forgotPassword(String email) {
+    final result = _userDatasource.forgotPassword(email);
+
+    return result;
+  }
 }

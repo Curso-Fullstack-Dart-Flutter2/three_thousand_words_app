@@ -34,6 +34,17 @@ class LoginController {
     }
   }
 
+  Future<void> forgotPassword(String email) async {
+    try {
+      await _userUsecase.forgotPassword(email);
+
+      log('Email has changed');
+    } on Exception catch (error, stackTrace) {
+      log('Error in controller to forgot password',
+          error: error, stackTrace: stackTrace);
+    }
+  }
+
   void dispose() {
     _isDisposed = true;
     _loadingController.close();
