@@ -5,7 +5,7 @@ import 'package:three_thousand_words/app/core/database/sqlite_migation_factory.d
 
 class SqliteConnectionFactory {
   static const _version = 1;
-  static const _database_name = 'THEE_THOUSAND_WORD';
+  static const _databaseName = 'TRHEE_THOUSAND_WORD_DB';
 
   static SqliteConnectionFactory? _instance;
   Database? _database;
@@ -21,7 +21,7 @@ class SqliteConnectionFactory {
 
   Future<Database> openConnection() async {
     final databasePath = await getDatabasesPath();
-    final databasePathFinal = join(databasePath, _database_name);
+    final databasePathFinal = join(databasePath, _databaseName);
 
     if (_database == null) {
       await _lock.synchronized(() async {
