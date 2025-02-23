@@ -23,7 +23,7 @@ class HttpCoreImpl implements HttpCore {
     ProgressCallback? onReceiveProgress,
   }) async {
     try {
-      final Response response = await _dio.get(
+      final response = await _dio.get(
         url,
         queryParameters: queryParameters,
         options: options,
@@ -47,7 +47,7 @@ class HttpCoreImpl implements HttpCore {
     ProgressCallback? onReceiveProgress,
   }) async {
     try {
-      final Response response = await _dio.post(
+      final response = await _dio.post(
         url,
         data: data,
         options: options,
@@ -72,7 +72,7 @@ class HttpCoreImpl implements HttpCore {
     ProgressCallback? onReceiveProgress,
   }) async {
     try {
-      final Response response = await _dio.put(
+      final response = await _dio.put(
         url,
         data: data,
         queryParameters: queryParameters,
@@ -97,7 +97,7 @@ class HttpCoreImpl implements HttpCore {
     CancelToken? cancelToken,
   }) async {
     try {
-      final Response response = await _dio.delete(
+      final response = await _dio.delete(
         url,
         data: data,
         queryParameters: queryParameters,
