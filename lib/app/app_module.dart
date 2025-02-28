@@ -16,6 +16,12 @@ import 'package:three_thousand_words/app/features/dictionary/domain/repositories
 import 'package:three_thousand_words/app/features/dictionary/domain/usecases/dictionary_usecase.dart';
 import 'package:three_thousand_words/app/features/dictionary/domain/usecases/dictionary_usecase_impl.dart';
 import 'package:three_thousand_words/app/features/splash/presentation/controller/splash_controller.dart';
+import 'package:three_thousand_words/app/features/words/data/datasources/words_datasource.dart';
+import 'package:three_thousand_words/app/features/words/data/datasources/words_datasource_impl.dart';
+import 'package:three_thousand_words/app/features/words/data/repositories/words_repository_impl.dart';
+import 'package:three_thousand_words/app/features/words/domain/repositories/words_repository.dart';
+import 'package:three_thousand_words/app/features/words/domain/usecases/words_usecase.dart';
+import 'package:three_thousand_words/app/features/words/domain/usecases/words_usecase_impl.dart';
 
 GetIt getIt = GetIt.instance;
 
@@ -38,6 +44,13 @@ Future<void> appGetItInitial() async {
       () => DictionaryRepositoryImpl(datasource: getIt()));
   getIt.registerLazySingleton<DictionaryUsecase>(
       () => DictionaryUsecaseImpl(repository: getIt()));
+
+  getIt.registerLazySingleton<WordsDatasource>(
+      () => WordsDatasourceImpl());
+  getIt.registerLazySingleton<WordsRepository>(
+      () => WordsRepositoryImpl(datasource: getIt()));
+  getIt.registerLazySingleton<WordsUsecase>(
+      () => WordsUsecaseImpl(repository: getIt()));
 
   getIt.registerLazySingleton(() => RegisterController(userUsecase: getIt()));
   getIt.registerLazySingleton(() => LoginController(userUsecase: getIt()));
