@@ -1,5 +1,5 @@
-import 'package:three_thousand_words/app/features/dictionary/data/models/dictionary_model.dart';
+import 'package:three_thousand_words/app/features/dictionary/domain/entities/dictionary_entity.dart';
 
 abstract class DictionaryRepository {
-  Future<DictionaryModel> getWord(String word);
+  Future<DictionaryEntity> getWord(String word);
 }

@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:three_thousand_words/app/features/dictionary/data/datasource/dictionary_datasource.dart';
-import 'package:three_thousand_words/app/features/dictionary/data/models/dictionary_model.dart';
+import 'package:three_thousand_words/app/features/dictionary/domain/entities/dictionary_entity.dart';
 import 'package:three_thousand_words/app/features/dictionary/domain/repositories/dictionary_repository.dart';
 
 class DictionaryRepositoryImpl implements DictionaryRepository {
@@ -11,7 +11,7 @@ class DictionaryRepositoryImpl implements DictionaryRepository {
       : _datasource = datasource;
 
   @override
-  Future<DictionaryModel> getWord(String word) {
+  Future<DictionaryEntity> getWord(String word) {
     try {
       final result = _datasource.getWord(word);
 

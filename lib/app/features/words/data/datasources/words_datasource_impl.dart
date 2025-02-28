@@ -1,14 +1,17 @@
-import 'package:three_thousand_words/app/core/database/sqlite_connection_factory.dart';
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
 import 'package:three_thousand_words/app/features/words/data/datasources/words_datasource.dart';
+import 'package:three_thousand_words/app/features/words/data/models/word_model.dart';
 
 class WordsDatasourceImpl implements WordsDatasource {
-  final SqliteConnectionFactory _sqliteConnectionFactory;
-
-  WordsDatasourceImpl(SqliteConnectionFactory sqliteConnectionFactory)
-      : _sqliteConnectionFactory = sqliteConnectionFactory;
+  WordsDatasourceImpl();
 
   @override
-  Future<void> saveWords() {
-    throw UnimplementedError();
+  Future<List<WordModel>> fetchWords() async {
+      final String jsonString = await rootBundle.loadString('assets/words.json');
+      List<dynamic> jsonList = json.decode(jsonString);
+
+      return jsonList.map((json) => WordModel.fromJson(json)).toList();
   }
 }
