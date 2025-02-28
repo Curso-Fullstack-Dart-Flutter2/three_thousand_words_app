@@ -27,11 +27,12 @@ class DictionaryModel extends DictionaryEntity {
 }
 
 class PhoneticModel extends PhoneticEntity {
-  PhoneticModel(
-      {super.text,
-      required super.audio,
-      super.sourceUrl,
-      LicenseModel? super.license});
+  PhoneticModel({
+    super.text,
+    required super.audio,
+    super.sourceUrl,
+    LicenseModel? super.license,
+  });
 
   factory PhoneticModel.fromJson(Map<String, dynamic> json) {
     return PhoneticModel(

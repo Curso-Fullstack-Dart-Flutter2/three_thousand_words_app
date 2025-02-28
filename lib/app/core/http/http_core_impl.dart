@@ -1,9 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:logger/logger.dart';
 import 'package:three_thousand_words/app/core/http/http_core.dart';
 import 'package:three_thousand_words/app/core/http/interceptors.dart';
 
 class HttpCoreImpl implements HttpCore {
   late final Dio _dio;
+
+  final logger = Logger();
 
   HttpCoreImpl()
       : _dio = Dio(
@@ -32,7 +35,8 @@ class HttpCoreImpl implements HttpCore {
       );
 
       return response;
-    } on DioException {
+    } on DioException catch (error, stacktrace) {
+      logger.e('${error.message}', error: error.error, stackTrace: stacktrace);
       rethrow;
     }
   }
@@ -56,7 +60,8 @@ class HttpCoreImpl implements HttpCore {
       );
 
       return response;
-    } catch (e) {
+    } on DioException catch (error, stacktrace) {
+      logger.e('${error.message}', error: error.error, stackTrace: stacktrace);
       rethrow;
     }
   }
@@ -83,7 +88,8 @@ class HttpCoreImpl implements HttpCore {
       );
 
       return response;
-    } catch (e) {
+    } on DioException catch (error, stacktrace) {
+      logger.e('${error.message}', error: error.error, stackTrace: stacktrace);
       rethrow;
     }
   }
@@ -106,7 +112,8 @@ class HttpCoreImpl implements HttpCore {
       );
 
       return response.data;
-    } catch (e) {
+    } on DioException catch (error, stacktrace) {
+      logger.e('${error.message}', error: error.error, stackTrace: stacktrace);
       rethrow;
     }
   }
