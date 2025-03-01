@@ -11,11 +11,11 @@ class WordsUsecaseImpl implements WordsUsecase {
       : _repository = repository;
 
   @override
-  Future<List<WordEntity>> fetchWords() {
+  Future<List<WordEntity>> fetchWords({int limit = 5, int offset = 0}) async {
     try {
-      final result = _repository.fetchWords();
+      final result = await _repository.fetchWords();
 
-      return result;
+      return result.skip(offset).take(limit).toList();
     } on Exception catch (error, stacktrace) {
       log('Error: $error');
       log('Stacktrace: $stacktrace');
