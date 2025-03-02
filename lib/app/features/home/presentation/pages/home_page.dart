@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:three_thousand_words/app/app_module.dart';
+import 'package:three_thousand_words/app/core/ui/design_system/ttw_ds_item_tile.dart';
 import 'package:three_thousand_words/app/features/home/presentation/controllers/home_controller.dart';
 import 'package:three_thousand_words/app/features/home/presentation/widgets/ttw_word_question_widget.dart';
 import 'package:three_thousand_words/app/features/words/domain/entities/word_entity.dart';
@@ -69,13 +70,13 @@ class _HomePageState extends State<HomePage> {
             return Column(
               children: [
                 Expanded(
-                  child: ListView.builder(
+                  child: ListView.separated(
                     itemCount: words.length,
                     itemBuilder: (context, index) {
                       final word = words[index];
                       return GestureDetector(
-                        child: ListTile(
-                          title: Text(word.word),
+                        child: TtwDsItemTile(
+                          title: word.word,
                         ),
                         onTap: () async {
                           final wordDictionary =
@@ -92,6 +93,7 @@ class _HomePageState extends State<HomePage> {
                         },
                       );
                     },
+                    separatorBuilder: (context, index) => const SizedBox(height: 10),
                   ),
                 ),
                 ElevatedButton(
