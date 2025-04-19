@@ -17,7 +17,6 @@ import 'package:three_thousand_words/app/features/dictionary/data/repositories/d
 import 'package:three_thousand_words/app/features/dictionary/domain/repositories/dictionary_repository.dart';
 import 'package:three_thousand_words/app/features/dictionary/domain/usecases/dictionary_usecase.dart';
 import 'package:three_thousand_words/app/features/dictionary/domain/usecases/dictionary_usecase_impl.dart';
-import 'package:three_thousand_words/app/features/home/presentation/controllers/home_controller.dart';
 import 'package:three_thousand_words/app/features/splash/presentation/controller/splash_controller.dart';
 import 'package:three_thousand_words/app/features/words/data/datasources/words_datasource.dart';
 import 'package:three_thousand_words/app/features/words/data/datasources/words_datasource_impl.dart';
@@ -58,7 +57,4 @@ Future<void> appGetItInitial() async {
       () => WordsRepositoryImpl(datasource: getIt()));
   getIt.registerLazySingleton<WordsUsecase>(
       () => WordsUsecaseImpl(repository: getIt()));
-
-  getIt.registerLazySingleton(
-      () => HomeController(wordsUsecase: getIt(), dictionaryUsecase: getIt()));
 }

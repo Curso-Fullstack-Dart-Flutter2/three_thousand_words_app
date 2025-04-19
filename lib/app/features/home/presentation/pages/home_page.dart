@@ -1,10 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:three_thousand_words/app/app_module.dart';
-import 'package:three_thousand_words/app/core/ui/design_system/ttw_ds_item_tile.dart';
-import 'package:three_thousand_words/app/features/home/presentation/controllers/home_controller.dart';
-import 'package:three_thousand_words/app/features/home/presentation/widgets/ttw_word_question_widget.dart';
-import 'package:three_thousand_words/app/features/words/domain/entities/word_entity.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,18 +9,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late final HomeController _controller = getIt<HomeController>();
-
   @override
   void initState() {
     super.initState();
-    _controller.getWords();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 
   @override
@@ -48,64 +34,6 @@ class _HomePageState extends State<HomePage> {
             },
           ),
         ],
-      ),
-      body: Center(
-        child: StreamBuilder<List<WordEntity>>(
-          stream: _controller.wordsStream,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const CircularProgressIndicator();
-            }
-
-            if (snapshot.hasError) {
-              return Text('Erro: ${snapshot.error}');
-            }
-
-            final words = snapshot.data ?? [];
-
-            if (words.isEmpty) {
-              return const Text('Nenhuma palavra encontrada.');
-            }
-
-            return Column(
-              children: [
-                Expanded(
-                  child: ListView.separated(
-                    itemCount: words.length,
-                    itemBuilder: (context, index) {
-                      final word = words[index];
-                      return GestureDetector(
-                        child: TtwDsItemTile(
-                          title: word.word,
-                        ),
-                        onTap: () async {
-                          final wordDictionary =
-                              await _controller.searchWord(word.word);
-
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return TtwWordQuestionWidget(
-                                wordDictionary: wordDictionary,
-                              );
-                            },
-                          );
-                        },
-                      );
-                    },
-                    separatorBuilder: (context, index) => const SizedBox(height: 10),
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    _controller.getWords(loadMore: true);
-                  },
-                  child: const Text('Carregar mais'),
-                ),
-              ],
-            );
-          },
-        ),
       ),
     );
   }
