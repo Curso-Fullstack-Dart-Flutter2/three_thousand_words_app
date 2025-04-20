@@ -28,7 +28,9 @@ class _ThreeThousandWordsAppState extends State<ThreeThousandWordsApp> {
       title: 'Three Thousand Words app',
       debugShowCheckedModeBanner: false,
       initialRoute: '/splash',
-      theme: ThreeThousandUiConfig.theme,
+      theme: ThreeThousandUiConfig.whiteTheme,
+      darkTheme: ThreeThousandUiConfig.darkTheme,
+      themeMode: ThemeMode.dark,
       routes: {
         '/splash': (context) => const SplashPage(),
         '/login': (context) => const LoginPage(),
