@@ -5,6 +5,7 @@ import 'package:three_thousand_words/app/features/auth/login/presentation/pages/
 import 'package:three_thousand_words/app/features/auth/register/presentation/pages/register_page.dart';
 import 'package:three_thousand_words/app/features/home/presentation/pages/home_page.dart';
 import 'package:three_thousand_words/app/features/splash/presentation/pages/splash_page.dart';
+import 'package:three_thousand_words/app/features/words/presentation/pages/words_page.dart';
 
 class ThreeThousandWordsApp extends StatefulWidget {
   const ThreeThousandWordsApp({super.key});
@@ -36,6 +37,7 @@ class _ThreeThousandWordsAppState extends State<ThreeThousandWordsApp> {
         '/login': (context) => const LoginPage(),
         '/register': (context) => const RegisterPage(),
         '/home': (context) => const HomePage(),
+        '/words': (context) => const WordsPage(),
       },
     );
   }

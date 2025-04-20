@@ -20,36 +20,39 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "👋 Olá!",
+                '👋 Olá!',
                 style: TtwDsAppTextStyles.ttwStyleTitle(context),
               ),
               Text(
-                "pronto para estudar hoje?",
+                'pronto para estudar hoje?',
                 style: TtwDsAppTextStyles.ttwStyleTitle(context),
               ),
               const SizedBox(height: 8),
               Text(
-                "Você memorizou 55 de 3000 palavras!",
+                'Você memorizou 55 de 3000 palavras!',
                 style: TtwDsAppTextStyles.ttwStyleBody(context),
               ),
               const SizedBox(height: 32),
               TtwDsPrimaryButtom(
-                text: "📚 Estudar novas palavras",
+                text: '📚 Estudar novas palavras',
+                action: () => Navigator.pushNamed(
+                  context,
+                  '/words',
+                ),
+              ),
+              const SizedBox(height: 16),
+              TtwDsPrimaryButtom(
+                text: '🔁 Revisar palavras difíceis',
                 action: () {},
               ),
               const SizedBox(height: 16),
               TtwDsPrimaryButtom(
-                text: "🔁 Revisar palavras difíceis",
-                action: () {},
-              ),
-              const SizedBox(height: 16),
-              TtwDsPrimaryButtom(
-                text: "📈 Ver meu progresso",
+                text: '📈 Ver meu progresso',
                 action: () {},
               ),
               const Spacer(),
@@ -58,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                 child: IconButton(
                   onPressed: () {},
                   icon: Icon(
-                    Icons.settings,
+                    Icons.logout,
                     color: Theme.of(context).iconTheme.color,
                   ),
                 ),

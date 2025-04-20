@@ -5,12 +5,12 @@ class TtwDsAppTextStyles {
   static TextStyle ttwStyleTitle(BuildContext context) => GoogleFonts.poppins(
         fontSize: 24,
         fontWeight: FontWeight.bold,
-        color: Theme.of(context).colorScheme.onBackground,
+        color: Theme.of(context).colorScheme.onSurface,
       );
 
   static TextStyle ttwStyleBody(BuildContext context) => GoogleFonts.poppins(
         fontSize: 16,
-        color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7),
+        color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
       );
 
   static TextStyle ttwStyleButton(BuildContext context) => GoogleFonts.poppins(
