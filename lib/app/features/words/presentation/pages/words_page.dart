@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:three_thousand_words/app/core/ui/design_system/components/ttw_ds_app_bar.dart';
 import 'package:three_thousand_words/app/core/ui/design_system/components/ttw_ds_primary_buttom.dart';
+import 'package:three_thousand_words/app/core/ui/design_system/components/ttw_ds_quiz_dialog.dart';
 
 class WordsPage extends StatefulWidget {
   const WordsPage({super.key});
@@ -22,7 +23,11 @@ class _WordsPageState extends State<WordsPage> {
             children: [
               TtwDsPrimaryButtom(
                 text: 'Apple',
-                action: () {},
+                action: () => showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (context) => const TtwDsQuizDialog(word: 'Apple'),
+                ),
               ),
               const SizedBox(height: 16),
               TtwDsPrimaryButtom(
