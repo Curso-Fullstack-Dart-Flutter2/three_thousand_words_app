@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:three_thousand_words/app/core/ui/design_system/components/ttw_ds_primary_buttom.dart';
+import 'package:three_thousand_words/app/core/ui/design_system/components/buttons/styles/ttw_choice_button_home_style.dart';
+import 'package:three_thousand_words/app/core/ui/design_system/components/buttons/ttw_ds_button.dart';
 import 'package:three_thousand_words/app/core/ui/design_system/styles/ttw_ds_app_text_styles.dart';
+import 'package:three_thousand_words/app/core/ui/design_system/styles/ttw_ds_colors.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -38,21 +40,24 @@ class _HomePageState extends State<HomePage> {
                 style: TtwDsAppTextStyles.ttwStyleBody(context),
               ),
               const SizedBox(height: 32),
-              TtwDsPrimaryButtom(
+              TtwDsButton(
                 text: '📚 Estudar novas palavras',
-                action: () => Navigator.pushNamed(
-                  context,
-                  '/words',
-                ),
+                style: TtwChoiceButtonHomeStyle(
+                    customButtomColor: TtwDsColors.ttwGreen),
+                action: () => Navigator.pushNamed(context, '/words'),
               ),
               const SizedBox(height: 16),
-              TtwDsPrimaryButtom(
+              TtwDsButton(
                 text: '🔁 Revisar palavras difíceis',
+                style: TtwChoiceButtonHomeStyle(
+                    customButtomColor: TtwDsColors.ttwOrange),
                 action: () {},
               ),
               const SizedBox(height: 16),
-              TtwDsPrimaryButtom(
+              TtwDsButton(
                 text: '📈 Ver meu progresso',
+                style: TtwChoiceButtonHomeStyle(
+                    customButtomColor: TtwDsColors.ttwBlue),
                 action: () {},
               ),
               const Spacer(),
