@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:three_thousand_words/app/features/words/data/datasources/words_datasource.dart';
-import 'package:three_thousand_words/app/features/words/domain/entities/word_entity.dart';
+import 'package:three_thousand_words/app/features/words/domain/entities/paginate_words_response_entity.dart';
 import 'package:three_thousand_words/app/features/words/domain/repositories/words_repository.dart';
 
 class WordsRepositoryImpl implements WordsRepository {
@@ -11,7 +11,7 @@ class WordsRepositoryImpl implements WordsRepository {
       : _datasource = datasource;
 
   @override
-  Future<List<WordEntity>> fetchWords() {
+  Future<PaginateWordsResponseEntity> fetchWords() {
     try {
       final result = _datasource.fetchWords();
 

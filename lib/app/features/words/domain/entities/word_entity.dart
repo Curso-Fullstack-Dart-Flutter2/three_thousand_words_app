@@ -1,13 +1,13 @@
 class WordEntity {
-  final String word;
+  final int id;
+  final String palavra;
+  final String traducao;
+  final String pronuncia;
 
-  WordEntity({required this.word});
-
-  factory WordEntity.fromJson(Map<String, dynamic> json) {
-    return WordEntity(word: json['word']);
-  }
-
-  Map<String, dynamic> toJson() {
-    return {'word': word};
-  }
+  WordEntity({
+    required this.id,
+    required this.palavra,
+    required this.traducao,
+    required this.pronuncia,
+  });
 }

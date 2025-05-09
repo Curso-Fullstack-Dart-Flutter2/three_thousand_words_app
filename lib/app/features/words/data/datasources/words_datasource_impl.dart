@@ -1,17 +1,32 @@
-import 'dart:convert';
+import 'dart:developer';
 
-import 'package:flutter/services.dart';
+import 'package:three_thousand_words/app/core/http/http_core.dart';
 import 'package:three_thousand_words/app/features/words/data/datasources/words_datasource.dart';
-import 'package:three_thousand_words/app/features/words/data/models/word_model.dart';
+import 'package:three_thousand_words/app/features/words/data/models/paginate_words_response_model.dart';
 
 class WordsDatasourceImpl implements WordsDatasource {
-  WordsDatasourceImpl();
+  final HttpCore _httpCore;
+
+  WordsDatasourceImpl({required HttpCore httpCore}) : _httpCore = httpCore;
 
   @override
-  Future<List<WordModel>> fetchWords() async {
-      final String jsonString = await rootBundle.loadString('assets/words.json');
-      List<dynamic> jsonList = json.decode(jsonString);
+  Future<PaginateWordsResponseModel> fetchWords(
+      {int page = 1, int limit = 5}) async {
+    try {
+      final result = await _httpCore
+          .get('http://localhost:3000/words-info?page=$page&limit=$limit');
 
-      return jsonList.map((json) => WordModel.fromJson(json)).toList();
+      final data = result.data;
+
+      return PaginateWordsResponseModel.fromJson(data);
+    } on Exception catch (error, stackTrace) {
+      log('Error fetching words: $error');
+      log('Stack trace: $stackTrace');
+
+      rethrow;
+    } catch (error) {
+      log('Unexpected error: $error');
+      rethrow;
+    }
   }
 }
