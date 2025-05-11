@@ -23,16 +23,9 @@ class WordsController {
     }
   }
 
-  List<String> generateWrongTranslationsFor(WordEntity word, {int count = 3}) {
+  List<String> generateWrongTranslationsFor(WordEntity word) {
     final wordsList = _wordsController.valueOrNull?.data ?? [];
 
-    final wrongOptions = wordsList
-        .where((w) => w.traducao != word.traducao)
-        .map((w) => w.traducao)
-        .toSet()
-        .toList()
-      ..shuffle();
-
-    return wrongOptions.take(count).toList();
+    return _usecase.generateWrongTranslations(word, wordsList);
   }
 }
