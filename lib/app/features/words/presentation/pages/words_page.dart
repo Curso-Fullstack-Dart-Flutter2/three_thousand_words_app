@@ -39,18 +39,25 @@ class _WordsPageState extends State<WordsPage> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: data?.data
                             .map((word) => Padding(
-                              padding: const EdgeInsets.only(bottom: 20),
-                              child: TtwDsPrimaryButtom(
+                                  padding: const EdgeInsets.only(bottom: 20),
+                                  child: TtwDsPrimaryButtom(
                                     text: word.palavra,
-                                    action: () => showDialog(
-                                      context: context,
-                                      barrierDismissible: false,
-                                      builder: (context) => TtwDsQuizDialog(
-                                        word: word.palavra,
-                                      ),
-                                    ),
+                                    action: () {
+                                      final wrongOptions = _controller
+                                          .generateWrongTranslationsFor(word);
+
+                                      showDialog(
+                                        context: context,
+                                        barrierDismissible: false,
+                                        builder: (context) => TtwDsQuizDialog(
+                                          word: word.palavra,
+                                          correctTranslation: word.traducao,
+                                          wrongTranslations: wrongOptions,
+                                        ),
+                                      );
+                                    },
                                   ),
-                            ))
+                                ))
                             .toList() ??
                         [],
                   ),

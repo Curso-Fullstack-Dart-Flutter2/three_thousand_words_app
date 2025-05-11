@@ -4,14 +4,21 @@ import 'package:three_thousand_words/app/core/ui/design_system/styles/ttw_ds_app
 
 class TtwDsQuizDialog extends StatelessWidget {
   final String word;
+  final String correctTranslation;
+  final List<String> wrongTranslations;
 
   const TtwDsQuizDialog({
     required this.word,
+    required this.correctTranslation,
+    required this.wrongTranslations,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
+    final alternativesQuiz = [correctTranslation, ...wrongTranslations]
+      ..shuffle();
+
     return Dialog(
       child: Container(
         width: double.infinity,
@@ -33,25 +40,23 @@ class TtwDsQuizDialog extends StatelessWidget {
                 style: TtwDsAppTextStyles.ttwStyleBody(context),
               ),
               const SizedBox(height: 10),
-              TtwDsPrimaryButtom(
-                text: 'Árabe',
-                action: () {},
-              ),
-              const SizedBox(height: 16),
-              TtwDsPrimaryButtom(
-                text: 'Americano',
-                action: () {},
-              ),
-              const SizedBox(height: 16),
-              TtwDsPrimaryButtom(
-                text: 'Africano',
-                action: () {},
-              ),
-              const SizedBox(height: 16),
-              TtwDsPrimaryButtom(
-                text: 'Bíblia',
-                action: () {},
-              ),
+              ...alternativesQuiz.map((option) => Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: TtwDsPrimaryButtom(
+                      text: option,
+                      action: () {
+                        final isCorrect = option == correctTranslation;
+                        
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(isCorrect
+                                ? 'Correto! 🎉'
+                                : 'Errado 😢. Correto: $correctTranslation'),
+                          ),
+                        );
+                      },
+                    ),
+                  )),
               const SizedBox(height: 20),
               TtwDsPrimaryButtom(
                 text: 'Confirmar',
