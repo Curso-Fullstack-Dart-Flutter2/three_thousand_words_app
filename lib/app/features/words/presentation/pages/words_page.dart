@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:three_thousand_words/app/app_module.dart';
+import 'package:three_thousand_words/app/core/ui/design_system/components/buttons/styles/ttw_words_list_style.dart';
+import 'package:three_thousand_words/app/core/ui/design_system/components/buttons/ttw_ds_button.dart';
 import 'package:three_thousand_words/app/core/ui/design_system/components/ttw_ds_app_bar.dart';
-import 'package:three_thousand_words/app/core/ui/design_system/components/ttw_ds_primary_buttom.dart';
 import 'package:three_thousand_words/app/core/ui/design_system/components/ttw_ds_quiz_dialog.dart';
 import 'package:three_thousand_words/app/features/words/domain/entities/paginate_words_response_entity.dart';
 import 'package:three_thousand_words/app/features/words/presentation/controllers/words_controller.dart';
@@ -40,15 +41,17 @@ class _WordsPageState extends State<WordsPage> {
                     children: data?.data
                             .map((word) => Padding(
                                   padding: const EdgeInsets.only(bottom: 20),
-                                  child: TtwDsPrimaryButtom(
+                                  child: TtwDsButton(
                                     text: word.palavra,
+                                    style: TtwWordsListStyle(),
                                     action: () {
                                       final wrongOptions = _controller
                                           .generateWrongTranslationsFor(word);
 
                                       showDialog(
                                         context: context,
-                                        barrierDismissible: false,
+                                        barrierColor: Colors.white.withOpacity(0.7),
+                                        barrierDismissible: true,
                                         builder: (context) => TtwDsQuizDialog(
                                           word: word.palavra,
                                           correctTranslation: word.traducao,
