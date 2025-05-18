@@ -3,7 +3,7 @@ import 'package:three_thousand_words/app/app_module.dart';
 import 'package:three_thousand_words/app/core/ui/design_system/components/buttons/styles/ttw_words_list_style.dart';
 import 'package:three_thousand_words/app/core/ui/design_system/components/buttons/ttw_ds_button.dart';
 import 'package:three_thousand_words/app/core/ui/design_system/components/ttw_ds_app_bar.dart';
-import 'package:three_thousand_words/app/core/ui/design_system/components/ttw_ds_quiz_dialog.dart';
+import 'package:three_thousand_words/app/features/words/presentation/widgets/ttw_ds_quiz_dialog.dart';
 import 'package:three_thousand_words/app/features/words/domain/entities/paginate_words_response_entity.dart';
 import 'package:three_thousand_words/app/features/words/presentation/controllers/words_controller.dart';
 
@@ -50,7 +50,8 @@ class _WordsPageState extends State<WordsPage> {
 
                                       showDialog(
                                         context: context,
-                                        barrierColor: Colors.white.withOpacity(0.7),
+                                        barrierColor: Colors.white
+                                            .withAlpha((0.7 * 255).toInt()),
                                         barrierDismissible: true,
                                         builder: (context) => TtwDsQuizDialog(
                                           word: word.palavra,

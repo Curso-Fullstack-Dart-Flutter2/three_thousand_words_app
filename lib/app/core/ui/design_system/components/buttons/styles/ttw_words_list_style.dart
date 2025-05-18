@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:three_thousand_words/app/core/ui/design_system/components/buttons/styles/i_ttw_button_style.dart';
 import 'package:three_thousand_words/app/core/ui/design_system/styles/ttw_ds_app_text_styles.dart';
 import 'package:three_thousand_words/app/core/ui/design_system/styles/ttw_ds_colors.dart';
@@ -26,10 +27,14 @@ class TtwWordsListStyle implements ITtwButtonStyle {
   Widget buildChild(String text,
       {IconData? icon, required BuildContext context}) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(text, style: textStyle(context)),
-        const SizedBox(width: 8),
-        // Icon(icon, color: customButtomColor),
+        const Icon(
+          FontAwesomeIcons.solidSmile,
+          color: TtwDsColors.ttwWhite,
+          size: 16,
+        ),
       ],
     );
   }
