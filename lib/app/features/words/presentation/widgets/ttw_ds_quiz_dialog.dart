@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:three_thousand_words/app/app_module.dart';
 import 'package:three_thousand_words/app/core/ui/design_system/components/buttons/styles/ttw_alternatives_quiz_buttom_style.dart';
 import 'package:three_thousand_words/app/core/ui/design_system/components/buttons/styles/ttw_primary_button_style.dart';
 import 'package:three_thousand_words/app/core/ui/design_system/components/buttons/ttw_ds_button.dart';
 import 'package:three_thousand_words/app/core/ui/design_system/styles/ttw_ds_app_text_styles.dart';
 import 'package:three_thousand_words/app/core/ui/design_system/styles/ttw_ds_colors.dart';
+import 'package:three_thousand_words/app/features/words_local_db/presentation/controllers/words_local_db_controller.dart';
 
 class TtwDsQuizDialog extends StatefulWidget {
   final String word;
   final String correctTranslation;
   final List<String> wrongTranslations;
+  final String meaning;
 
   const TtwDsQuizDialog({
     required this.word,
     required this.correctTranslation,
     required this.wrongTranslations,
+    required this.meaning,
     super.key,
   });
 
@@ -22,6 +26,8 @@ class TtwDsQuizDialog extends StatefulWidget {
 }
 
 class _TtwDsQuizDialogState extends State<TtwDsQuizDialog> {
+  final _controller = getIt<WordsLocalDbController>();
+
   String? selected;
 
   late final alternativesQuiz = [

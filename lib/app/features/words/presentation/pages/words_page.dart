@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:three_thousand_words/app/app_module.dart';
+import 'package:three_thousand_words/app/core/ui/design_system/components/buttons/styles/ttw_primary_button_style.dart';
 import 'package:three_thousand_words/app/core/ui/design_system/components/buttons/styles/ttw_words_list_style.dart';
 import 'package:three_thousand_words/app/core/ui/design_system/components/buttons/ttw_ds_button.dart';
 import 'package:three_thousand_words/app/core/ui/design_system/components/ttw_ds_app_bar.dart';
@@ -37,9 +38,9 @@ class _WordsPageState extends State<WordsPage> {
                 AsyncSnapshot(connectionState: ConnectionState.waiting) =>
                   const Center(child: CircularProgressIndicator()),
                 AsyncSnapshot(hasData: true, data: final data) => Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: data?.data
-                            .map((word) => Padding(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        ...data?.data.map((word) => Padding(
                                   padding: const EdgeInsets.only(bottom: 20),
                                   child: TtwDsButton(
                                     text: word.palavra,
@@ -57,14 +58,20 @@ class _WordsPageState extends State<WordsPage> {
                                           word: word.palavra,
                                           correctTranslation: word.traducao,
                                           wrongTranslations: wrongOptions,
+                                          meaning: word.pronuncia,
                                         ),
                                       );
                                     },
                                   ),
-                                ))
-                            .toList() ??
-                        [],
-                  ),
+                                )) ??
+                            [],
+                        const Spacer(),
+                        TtwDsButton(
+                          text: 'Carregar mais palavras',
+                          style: TtwPrimaryButtonStyle(),
+                          action: () {},
+                        ),
+                      ]),
                 AsyncSnapshot(hasError: true, error: final error) => Center(
                     child: Text(
                       'Error: $error',
