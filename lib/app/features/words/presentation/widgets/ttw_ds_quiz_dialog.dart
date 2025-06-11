@@ -11,13 +11,13 @@ class TtwDsQuizDialog extends StatefulWidget {
   final String word;
   final String correctTranslation;
   final List<String> wrongTranslations;
-  final String meaning;
+  final String pronunciation;
 
   const TtwDsQuizDialog({
     required this.word,
     required this.correctTranslation,
     required this.wrongTranslations,
-    required this.meaning,
+    required this.pronunciation,
     super.key,
   });
 
@@ -30,13 +30,34 @@ class _TtwDsQuizDialogState extends State<TtwDsQuizDialog> {
 
   String? selected;
 
+  late final String word;
+  late final String translation;
+  late final String pronunciation;
+
+  @override
+  void initState() {
+    super.initState();
+    word = widget.word;
+    translation = widget.correctTranslation;
+    pronunciation = widget.pronunciation;
+  }
+
   late final alternativesQuiz = [
     widget.correctTranslation,
     ...widget.wrongTranslations
   ]..shuffle();
 
-  void _onConfirm() {
-    final isCorrect = selected == widget.correctTranslation;
+  void _onConfirm() async {
+    if (selected == null) return;
+
+    final isCorrect = _controller.isAnswerCorrect(
+      selected: selected!,
+      correctTranslation: widget.correctTranslation,
+    );
+
+    if (isCorrect) {
+      await _controller.saveWord(word, translation, pronunciation);
+    }
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(

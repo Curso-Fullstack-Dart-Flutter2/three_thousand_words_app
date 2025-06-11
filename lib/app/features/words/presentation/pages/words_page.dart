@@ -58,7 +58,7 @@ class _WordsPageState extends State<WordsPage> {
                                           word: word.palavra,
                                           correctTranslation: word.traducao,
                                           wrongTranslations: wrongOptions,
-                                          meaning: word.pronuncia,
+                                          pronunciation: word.pronuncia,
                                         ),
                                       );
                                     },
