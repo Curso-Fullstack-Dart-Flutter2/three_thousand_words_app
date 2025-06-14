@@ -25,19 +25,27 @@ class WordsLocalDbDatasourceImpl implements WordsLocalDbDatasource {
         'pronunciation': pronunciation,
         'meaning': translation,
       });
-    } on Exception catch (e) {
-      // TODO
+    } on Exception catch (error, stacktrace) {
+      log('Error adding word to local db: $error',
+          error: error, stackTrace: stacktrace);
     }
   }
 
   @override
   Future<List<WordsLocalDbModel>> getAllWords() async {
-    final connection = await _sqliteConnectionFactory.openConnection();
+    try {
+      final connection = await _sqliteConnectionFactory.openConnection();
 
-    final result = await connection.rawQuery('SELECT * FROM wordsLearned');
+      final result = await connection.rawQuery('SELECT * FROM wordsLearned');
 
-    return result.map((json) {
-      return WordsLocalDbModel.fromJson(json);
-    }).toList();
+      return result.map((json) {
+        return WordsLocalDbModel.fromJson(json);
+      }).toList();
+    } on Exception catch (error, stackTrace) {
+      log('Error fetching words from local db: $error',
+          error: error, stackTrace: stackTrace);
+
+      rethrow;
+    }
   }
 }

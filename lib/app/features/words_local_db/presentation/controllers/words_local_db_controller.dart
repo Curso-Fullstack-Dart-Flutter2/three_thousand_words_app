@@ -22,7 +22,7 @@ class WordsLocalDbController {
     _wordAddedSubject.add(word);
   }
 
-  Future<void> getWords() async {
+  Future<void> fetchSavedWords() async {
     final result = await _usecase.getAllWords();
     _allWordsSubject.add(result);
   }

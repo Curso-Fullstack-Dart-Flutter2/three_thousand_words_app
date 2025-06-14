@@ -37,11 +37,13 @@ GetIt getIt = GetIt.instance;
 
 Future<void> appGetItInitial() async {
   getIt.registerLazySingleton(() => FirebaseAuth.instance);
+  
+  getIt.registerLazySingleton<HttpCore>(() => HttpCoreImpl());
+
   getIt.registerLazySingleton(() => SqliteConnectionFactory());
 
   getIt.registerLazySingleton(() => SplashController());
 
-  getIt.registerLazySingleton<HttpCore>(() => HttpCoreImpl());
 
   getIt.registerLazySingleton<UserDatasource>(
       () => UserDatasourceImpl(firebaseAuth: getIt()));

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:synchronized/synchronized.dart';
@@ -22,6 +24,9 @@ class SqliteConnectionFactory {
   Future<Database> openConnection() async {
     final databasePath = await getDatabasesPath();
     final databasePathFinal = join(databasePath, _databaseName);
+
+    log('* Opening database at path: $databasePath');
+    log('* Database path final: $databasePathFinal');
 
     if (_database == null) {
       await _lock.synchronized(() async {
@@ -50,7 +55,6 @@ class SqliteConnectionFactory {
 
   Future<void> _onCreate(Database database, int version) async {
     final batch = database.batch();
-
     final migrations = SqliteMigationFactory().getCreateMigration();
 
     for (var migration in migrations) {
@@ -63,7 +67,6 @@ class SqliteConnectionFactory {
   Future<void> _onUpgrade(
       Database database, int oldVersion, int version) async {
     final batch = database.batch();
-
     final migrations = SqliteMigationFactory().getUpgradeMigration(oldVersion);
 
     for (var migration in migrations) {

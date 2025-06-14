@@ -5,11 +5,11 @@ class MigrationV1 implements Migration {
   @override
   void create(Batch batch) {
     batch.execute('''
-        CREATE TABLE wordsLearned (
+        create table wordsLearned(
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           word TEXT NOT NULL,
           pronunciation TEXT NOT NULL,
-          meaning TEXT NOT NULL,
+          meaning TEXT NOT NULL
         )
     ''');
   }
