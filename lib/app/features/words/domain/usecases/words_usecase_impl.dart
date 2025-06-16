@@ -13,9 +13,9 @@ class WordsUsecaseImpl implements WordsUsecase {
       : _repository = repository;
 
   @override
-  Future<PaginateWordsResponseEntity> fetchWords() async {
+  Future<PaginateWordsResponseEntity> fetchWords({required int page}) async {
     try {
-      final result = await _repository.fetchWords();
+      final result = await _repository.fetchWords(page: page);
 
       return result;
     } on Exception catch (error, stacktrace) {

@@ -14,9 +14,9 @@ class WordsController {
 
   WordsController({required WordsUsecase usecase}) : _usecase = usecase;
 
-  Future<void> fetchWords() async {
+  Future<void> fetchWords({required int page}) async {
     try {
-      final result = await _usecase.fetchWords();
+      final result = await _usecase.fetchWords(page: page);
       _wordsController.add(result);
     } catch (error) {
       log('Error fetching words: $error');

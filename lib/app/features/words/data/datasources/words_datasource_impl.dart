@@ -11,7 +11,7 @@ class WordsDatasourceImpl implements WordsDatasource {
 
   @override
   Future<PaginateWordsResponseModel> fetchWords(
-      {int page = 1, int limit = 5}) async {
+      {required int page, int limit = 5}) async {
     try {
       final result = await _httpCore
           .get('http://localhost:3000/words-info?page=$page&limit=$limit');

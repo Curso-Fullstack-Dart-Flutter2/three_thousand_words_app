@@ -11,9 +11,9 @@ class WordsRepositoryImpl implements WordsRepository {
       : _datasource = datasource;
 
   @override
-  Future<PaginateWordsResponseEntity> fetchWords() {
+  Future<PaginateWordsResponseEntity> fetchWords({required int page}) async {
     try {
-      final result = _datasource.fetchWords();
+      final result = _datasource.fetchWords(page: page);
 
       return result;
     } on Exception catch (error, stacktrace) {

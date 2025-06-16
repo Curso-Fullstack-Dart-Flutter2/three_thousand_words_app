@@ -18,10 +18,17 @@ class WordsPage extends StatefulWidget {
 class _WordsPageState extends State<WordsPage> {
   final _controller = getIt<WordsController>();
 
+  int _currentPage = 1;
+
   @override
   void initState() {
-    _controller.fetchWords();
+    _controller.fetchWords(page: _currentPage);
     super.initState();
+  }
+
+  void _loadMoreWords() {
+    _currentPage++;
+    _controller.fetchWords(page: _currentPage);
   }
 
   @override
@@ -69,7 +76,7 @@ class _WordsPageState extends State<WordsPage> {
                         TtwDsButton(
                           text: 'Carregar mais palavras',
                           style: TtwPrimaryButtonStyle(),
-                          action: () {},
+                          action: _loadMoreWords,
                         ),
                       ]),
                 AsyncSnapshot(hasError: true, error: final error) => Center(
