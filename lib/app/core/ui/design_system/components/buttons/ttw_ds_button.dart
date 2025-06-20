@@ -3,7 +3,7 @@ import 'package:three_thousand_words/app/core/ui/design_system/components/button
 
 class TtwDsButton extends StatelessWidget {
   final String text;
-  final VoidCallback action;
+  final VoidCallback? action;
   final ITtwButtonStyle style;
   final IconData? icon;
 

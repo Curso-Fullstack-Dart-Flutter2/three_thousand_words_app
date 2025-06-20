@@ -17,6 +17,7 @@ class WordsPage extends StatefulWidget {
 
 class _WordsPageState extends State<WordsPage> {
   final _controller = getIt<WordsController>();
+  final Set<String> _correctWordsThisPage = {};
 
   int _currentPage = 1;
 
@@ -27,7 +28,10 @@ class _WordsPageState extends State<WordsPage> {
   }
 
   void _loadMoreWords() {
-    _currentPage++;
+    setState(() {
+      _correctWordsThisPage.clear();
+      _currentPage++;
+    });
     _controller.fetchWords(page: _currentPage);
   }
 
@@ -52,11 +56,11 @@ class _WordsPageState extends State<WordsPage> {
                                   child: TtwDsButton(
                                     text: word.palavra,
                                     style: TtwWordsListStyle(),
-                                    action: () {
+                                    action: () async {
                                       final wrongOptions = _controller
                                           .generateWrongTranslationsFor(word);
 
-                                      showDialog(
+                                      final result = await showDialog<bool>(
                                         context: context,
                                         barrierColor: Colors.white
                                             .withAlpha((0.7 * 255).toInt()),
@@ -68,6 +72,13 @@ class _WordsPageState extends State<WordsPage> {
                                           pronunciation: word.pronuncia,
                                         ),
                                       );
+
+                                      if (result == true) {
+                                        setState(() {
+                                          _correctWordsThisPage
+                                              .add(word.palavra);
+                                        });
+                                      }
                                     },
                                   ),
                                 )) ??
@@ -76,7 +87,10 @@ class _WordsPageState extends State<WordsPage> {
                         TtwDsButton(
                           text: 'Carregar mais palavras',
                           style: TtwPrimaryButtonStyle(),
-                          action: _loadMoreWords,
+                          action:
+                              _correctWordsThisPage.length == data?.data.length
+                                  ? _loadMoreWords
+                                  : null,
                         ),
                       ]),
                 AsyncSnapshot(hasError: true, error: final error) => Center(

@@ -71,7 +71,7 @@ class _TtwDsQuizDialogState extends State<TtwDsQuizDialog> {
     );
 
     Future.delayed(const Duration(seconds: 1), () {
-      Navigator.of(context).pop();
+      Navigator.of(context).pop(isCorrect);
     });
   }
 
