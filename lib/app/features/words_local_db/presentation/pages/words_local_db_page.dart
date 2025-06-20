@@ -37,30 +37,33 @@ class _WordsLocalDbPageState extends State<WordsLocalDbPage> {
               return switch (wordsSnapshot) {
                 AsyncSnapshot(connectionState: ConnectionState.waiting) =>
                   const Center(child: CircularProgressIndicator()),
-                AsyncSnapshot(hasData: true, data: final data) => Column(
-                    children: data
-                            ?.map((word) => Padding(
-                                  padding: const EdgeInsets.only(bottom: 20),
-                                  child: TtwDsButton(
-                                    text: word.word,
-                                    style: TtwWordsListStyle(),
-                                    action: () {
-                                      showDialog(
-                                        context: context,
-                                        barrierColor: Colors.white
-                                            .withAlpha((0.7 * 255).toInt()),
-                                        barrierDismissible: true,
-                                        builder: (context) =>
-                                          TtwWordTranslateWidget(
+                AsyncSnapshot(hasData: true, data: final data) =>
+                  SingleChildScrollView(
+                    child: Column(
+                      children: data
+                              ?.map((word) => Padding(
+                                    padding: const EdgeInsets.only(bottom: 20),
+                                    child: TtwDsButton(
+                                      text: word.word,
+                                      style: TtwWordsListStyle(),
+                                      action: () {
+                                        showDialog(
+                                          context: context,
+                                          barrierColor: Colors.white
+                                              .withAlpha((0.7 * 255).toInt()),
+                                          barrierDismissible: true,
+                                          builder: (context) =>
+                                              TtwWordTranslateWidget(
                                             word: word.word,
                                             meaning: word.meaning,
                                           ),
-                                      );
-                                    },
-                                  ),
-                                ))
-                            .toList() ??
-                        [],
+                                        );
+                                      },
+                                    ),
+                                  ))
+                              .toList() ??
+                          [],
+                    ),
                   ),
                 AsyncSnapshot(hasError: true, error: final error) =>
                   Center(child: Text('Error: $error')),
