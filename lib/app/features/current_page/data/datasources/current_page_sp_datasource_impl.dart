@@ -1,10 +1,10 @@
 import 'package:three_thousand_words/app/core/shared_preferences/shared_preferences_core.dart';
-import 'package:three_thousand_words/app/features/current_page/data/datasources/current_page.dart';
+import 'package:three_thousand_words/app/features/current_page/data/datasources/current_page_sp_datasource.dart';
 
-class CurrentPageImpl implements CurrentPage {
+class CurrentPageSpDatasourceImpl implements CurrentPageSpDatasource {
   final SharedPreferencesCore _sharedPreferencesCore;
 
-  CurrentPageImpl({required SharedPreferencesCore sharedPreferencesCore})
+  CurrentPageSpDatasourceImpl({required SharedPreferencesCore sharedPreferencesCore})
       : _sharedPreferencesCore = sharedPreferencesCore;
 
   @override
@@ -16,5 +16,10 @@ class CurrentPageImpl implements CurrentPage {
   Future<int> getCurrentPage() async {
     final currentPage = await _sharedPreferencesCore.getInt('current_page');
     return currentPage ?? 0;
+  }
+  
+  @override
+  Future<void> clearCurrentPage() {
+    return _sharedPreferencesCore.remove('current_page');
   }
 }
