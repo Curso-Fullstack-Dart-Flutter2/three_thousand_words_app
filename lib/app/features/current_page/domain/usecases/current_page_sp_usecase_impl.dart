@@ -20,7 +20,7 @@ class CurrentPageSpUsecaseImpl implements CurrentPageSpUsecase {
   @override
   Future<int> getCurrentPage() async {
     final result = await _currentPageSpRepository.getCurrentPage();
-    return result;
+    return result < 1 ? 1 : result;
   }
 
   @override

@@ -19,20 +19,34 @@ class _WordsPageState extends State<WordsPage> {
   final _controller = getIt<WordsController>();
   final Set<String> _correctWordsThisPage = {};
 
-  int _currentPage = 1;
+  int _lastPage = 1;
 
   @override
   void initState() {
-    _controller.fetchWords(page: _currentPage);
     super.initState();
+    _initializePage();
   }
 
-  void _loadMoreWords() {
+  void _initializePage() async {
+    final page = await _controller.fetchLastPage();
+
     setState(() {
-      _correctWordsThisPage.clear();
-      _currentPage++;
+      _lastPage = page;
     });
-    _controller.fetchWords(page: _currentPage);
+
+    await _controller.fetchWords(page: _lastPage);
+  }
+
+  void _loadMoreWords() async {
+    final nextPage = _lastPage + 1;
+
+    await _controller.fetchWords(page: nextPage);
+    await _controller.toSendLastPage(nextPage);
+    
+    setState(() {
+      _lastPage = nextPage;
+      _correctWordsThisPage.clear(); 
+    });
   }
 
   @override

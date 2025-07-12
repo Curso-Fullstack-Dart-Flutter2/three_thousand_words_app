@@ -1,8 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:three_thousand_words/app/core/database/sqlite_connection_factory.dart';
 import 'package:three_thousand_words/app/core/http/http_core.dart';
 import 'package:three_thousand_words/app/core/http/http_core_impl.dart';
+import 'package:three_thousand_words/app/core/shared_preferences/shared_preferences_core.dart';
+import 'package:three_thousand_words/app/core/shared_preferences/shared_preferences_core_impl.dart';
 import 'package:three_thousand_words/app/features/auth/login/presentation/controllers/login_controller.dart';
 import 'package:three_thousand_words/app/features/auth/register/presentation/Controllers/register_controller.dart';
 import 'package:three_thousand_words/app/features/auth/user/data/datasourses/user_datasource.dart';
@@ -11,6 +14,12 @@ import 'package:three_thousand_words/app/features/auth/user/data/repositories/us
 import 'package:three_thousand_words/app/features/auth/user/domain/repositories/user_repository.dart';
 import 'package:three_thousand_words/app/features/auth/user/domain/usecases/user_usecase.dart';
 import 'package:three_thousand_words/app/features/auth/user/domain/usecases/user_usecase_impl.dart';
+import 'package:three_thousand_words/app/features/current_page/data/datasources/current_page_sp_datasource.dart';
+import 'package:three_thousand_words/app/features/current_page/data/datasources/current_page_sp_datasource_impl.dart';
+import 'package:three_thousand_words/app/features/current_page/data/repositories/current_page_sp_repository_impl.dart';
+import 'package:three_thousand_words/app/features/current_page/domain/repositories/current_page_sp_repository.dart';
+import 'package:three_thousand_words/app/features/current_page/domain/usecases/current_page_sp_usecase.dart';
+import 'package:three_thousand_words/app/features/current_page/domain/usecases/current_page_sp_usecase_impl.dart';
 import 'package:three_thousand_words/app/features/dictionary/data/datasource/dictionary_datasource.dart';
 import 'package:three_thousand_words/app/features/dictionary/data/datasource/dictionary_datasource_impl.dart';
 import 'package:three_thousand_words/app/features/dictionary/data/repositories/dictionary_repository_impl.dart';
@@ -37,13 +46,18 @@ GetIt getIt = GetIt.instance;
 
 Future<void> appGetItInitial() async {
   getIt.registerLazySingleton(() => FirebaseAuth.instance);
-  
+
+  final sharedPreferences = await SharedPreferences.getInstance();
+  getIt.registerSingleton<SharedPreferences>(sharedPreferences);
+
   getIt.registerLazySingleton<HttpCore>(() => HttpCoreImpl());
 
   getIt.registerLazySingleton(() => SqliteConnectionFactory());
 
-  getIt.registerLazySingleton(() => SplashController());
+  getIt.registerLazySingleton<SharedPreferencesCore>(
+      () => SharedPreferencesCoreImpl(sharedPreferences: getIt()));
 
+  getIt.registerLazySingleton(() => SplashController());
 
   getIt.registerLazySingleton<UserDatasource>(
       () => UserDatasourceImpl(firebaseAuth: getIt()));
@@ -62,13 +76,21 @@ Future<void> appGetItInitial() async {
   getIt.registerLazySingleton<DictionaryUsecase>(
       () => DictionaryUsecaseImpl(repository: getIt()));
 
+  getIt.registerLazySingleton<CurrentPageSpDatasource>(
+      () => CurrentPageSpDatasourceImpl(sharedPreferencesCore: getIt()));
+  getIt.registerLazySingleton<CurrentPageSpRepository>(
+      () => CurrentPageSpRepositoryImpl(currentPageSpDatasource: getIt()));
+  getIt.registerLazySingleton<CurrentPageSpUsecase>(
+      () => CurrentPageSpUsecaseImpl(currentPageSpRepository: getIt()));
+
   getIt.registerLazySingleton<WordsDatasource>(
       () => WordsDatasourceImpl(httpCore: getIt()));
   getIt.registerLazySingleton<WordsRepository>(
       () => WordsRepositoryImpl(datasource: getIt()));
   getIt.registerLazySingleton<WordsUsecase>(
       () => WordsUsecaseImpl(repository: getIt()));
-  getIt.registerLazySingleton(() => WordsController(usecase: getIt()));
+  getIt.registerLazySingleton(
+      () => WordsController(usecase: getIt(), currentPageSpUsecase: getIt()));
 
   getIt.registerLazySingleton<WordsLocalDbDatasource>(
       () => WordsLocalDbDatasourceImpl(sqliteConnectionFactory: getIt()));

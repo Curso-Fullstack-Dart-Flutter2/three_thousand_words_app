@@ -13,6 +13,8 @@ class WordsDatasourceImpl implements WordsDatasource {
   Future<PaginateWordsResponseModel> fetchWords(
       {required int page, int limit = 5}) async {
     try {
+      log('Fetching words from page: $page with limit: $limit');
+      
       final result = await _httpCore
           .get('http://localhost:3000/words-info?page=$page&limit=$limit');
 
