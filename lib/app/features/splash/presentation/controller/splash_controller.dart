@@ -15,7 +15,7 @@ class SplashController {
       this.user = user;
       
       if (!isLogged.isClosed) {
-        isLogged.add(user != null);
+        isLogged.add(user == null);
       }
     });
   }

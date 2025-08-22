@@ -19,11 +19,38 @@ class ThreeThousandUiConfig {
   static ThemeData get darkTheme => ThemeData(
         scaffoldBackgroundColor: TtwDsColors.ttwBackground,
         cardColor: TtwDsColors.ttwCard,
-        primaryColor: TtwDsColors.ttwGreen,
+        primaryColor: TtwDsColors.ttwWhite,
         colorScheme: const ColorScheme.dark(
           surface: TtwDsColors.ttwBackground,
-          primary: TtwDsColors.ttwGreen,
+          primary: TtwDsColors.ttwWhite,
           secondary: TtwDsColors.ttwOrange,
+        ),
+        textSelectionTheme: const TextSelectionThemeData(
+          cursorColor: TtwDsColors.ttwWhite,
+          selectionColor: TtwDsColors.ttwWhite,
+          selectionHandleColor: TtwDsColors.ttwWhite,
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          filled: true,
+          isDense: true,
+          floatingLabelBehavior: FloatingLabelBehavior.never,
+          fillColor: TtwDsColors.ttwInputTextBlack,
+          labelStyle: const TextStyle(color: TtwDsColors.ttwWhite),
+          hintStyle: const TextStyle(color: TtwDsColors.ttwWhite),
+          focusColor: TtwDsColors.ttwWhite,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(color: TtwDsColors.ttwInputTextBlack),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(color: TtwDsColors.ttwInputTextBlack),
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide.none,
+          ),
+          contentPadding: const EdgeInsets.all(16),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(

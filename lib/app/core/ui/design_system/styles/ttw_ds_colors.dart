@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class TtwDsColors {
   static const ttwBackground = Color(0xFF121212);
+  static const ttwInputTextBlack = Color(0xFF2C2C2C);
   static const ttwCard = Color(0xFF1C1C1E);
   static const ttwBlue = Color(0xFF3759D6);
   static const ttwGreen = Color(0xFF22C55E);
