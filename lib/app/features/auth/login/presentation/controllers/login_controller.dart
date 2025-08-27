@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:rxdart/rxdart.dart';
+import 'package:three_thousand_words/app/exceptions/auth_exception.dart';
 import 'package:three_thousand_words/app/features/auth/user/domain/usecases/user_usecase.dart';
 
 class LoginController {
@@ -31,6 +32,35 @@ class LoginController {
           error: error, stackTrace: stackTrace);
 
       if (!_isDisposed) _errorController.add(error.toString());
+    }
+  }
+
+  Future<void> googleLogin() async {
+    if (_isDisposed) return;
+
+    _loadingController.add(true);
+    _errorController.add(null);
+
+    try {
+      await _userUsecase.googleLogin();
+      if (!_isDisposed) _loadingController.add(false);
+    } on AuthException catch (authError, stackTrace) {
+      log('Auth error in controller to login with Google',
+          error: authError, stackTrace: stackTrace);
+
+      _userUsecase.googleLogout();
+
+      if (!_isDisposed) _errorController.add(authError.message);
+    } on Exception catch (error, stackTrace) {
+      log('Error in controller to login with Google',
+          error: error, stackTrace: stackTrace);
+
+      _userUsecase.googleLogout();
+
+      if (!_isDisposed) _errorController.add(error.toString());
+    } finally {
+      _userUsecase.googleLogout();
+      if (!_isDisposed) _loadingController.add(false);
     }
   }
 

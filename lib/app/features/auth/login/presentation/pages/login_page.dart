@@ -111,7 +111,9 @@ class _LoginPageState extends State<LoginPage> {
                     borderRadius: BorderRadius.circular(5),
                     borderSide: BorderSide.none,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    _controller.googleLogin();
+                  },
                 ),
               ),
               TextButton(

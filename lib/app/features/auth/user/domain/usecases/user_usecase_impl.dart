@@ -30,6 +30,13 @@ class UserUsecaseImpl implements UserUsecase {
   }
 
   @override
+  Future<void> googleLogout() async {
+    final result = await _userRepository.googleLogout();
+
+    return result;
+  }
+
+  @override
   Future<void> forgotPassword(String email) {
     final result = _userRepository.forgotPassword(email);
 

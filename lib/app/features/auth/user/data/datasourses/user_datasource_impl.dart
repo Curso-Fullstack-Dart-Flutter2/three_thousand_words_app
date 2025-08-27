@@ -118,6 +118,12 @@ class UserDatasourceImpl implements UserDatasource {
   }
 
   @override
+  Future<void> googleLogout() async {
+    await GoogleSignIn().signOut();
+    await _firebaseAuth.signOut();
+  }
+
+  @override
   Future<void> forgotPassword(String email) async {
     try {
       final loginMethods =
