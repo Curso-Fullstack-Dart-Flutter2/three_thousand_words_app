@@ -1,0 +1,2 @@
+/Users/filipehaniel/Documents/threeThousandWords/three_thousand_words_app/android/app/.cxx/Debug/184h6o6q/x86_64/CMakeFiles/edit_cache.dir
+/Users/filipehaniel/Documents/threeThousandWords/three_thousand_words_app/android/app/.cxx/Debug/184h6o6q/x86_64/CMakeFiles/rebuild_cache.dir
