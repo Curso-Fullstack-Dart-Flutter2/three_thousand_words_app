@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:three_thousand_words/app/app_module.dart';
+import 'package:three_thousand_words/app/core/remote_config/remote_config_service.dart';
 import 'package:three_thousand_words/app/exceptions/auth_exception.dart';
 import 'package:three_thousand_words/app/features/auth/user/data/datasourses/user_datasource.dart';
 
@@ -91,7 +93,13 @@ class UserDatasourceImpl implements UserDatasource {
   @override
   Future<User?> googleLogin() async {
     try {
-      final googleSignIN = GoogleSignIn();
+      final clientId = getIt<RemoteConfigService>().googleClientId;
+
+      final googleSignIN = GoogleSignIn(
+        serverClientId: clientId,
+        scopes: ['email', 'profile'],
+      );
+
       final googleSignInAccount = await googleSignIN.signIn();
 
       if (googleSignInAccount != null) {
@@ -111,7 +119,8 @@ class UserDatasourceImpl implements UserDatasource {
         throw AuthException(message: 'Erro ao realizar login com o google');
       }
     } on Exception catch (error, stackTrace) {
-      log('Error to login user with google', error: error, stackTrace: stackTrace);
+      log('Error to login user with google',
+          error: error, stackTrace: stackTrace);
 
       throw AuthException(message: 'Erro ao realizar login com o google');
     }

@@ -1,9 +1,12 @@
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:get_it/get_it.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:three_thousand_words/app/core/database/sqlite_connection_factory.dart';
 import 'package:three_thousand_words/app/core/http/http_core.dart';
 import 'package:three_thousand_words/app/core/http/http_core_impl.dart';
+import 'package:three_thousand_words/app/core/remote_config/remote_config_service.dart';
+import 'package:three_thousand_words/app/core/remote_config/remote_config_service_impl.dart';
 import 'package:three_thousand_words/app/core/shared_preferences/shared_preferences_core.dart';
 import 'package:three_thousand_words/app/core/shared_preferences/shared_preferences_core_impl.dart';
 import 'package:three_thousand_words/app/features/auth/login/presentation/controllers/login_controller.dart';
@@ -46,6 +49,11 @@ GetIt getIt = GetIt.instance;
 
 Future<void> appGetItInitial() async {
   getIt.registerLazySingleton(() => FirebaseAuth.instance);
+
+  getIt.registerLazySingleton(() => FirebaseRemoteConfig.instance);
+
+  getIt.registerLazySingleton<RemoteConfigService>(
+      () => RemoteConfigServiceImpl(remoteConfig: getIt()));
 
   final sharedPreferences = await SharedPreferences.getInstance();
   getIt.registerSingleton<SharedPreferences>(sharedPreferences);

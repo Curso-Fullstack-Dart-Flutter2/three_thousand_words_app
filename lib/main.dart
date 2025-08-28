@@ -11,7 +11,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   final remoteConfig = FirebaseRemoteConfig.instance;
-  remoteConfig.fetchAndActivate();
+  await remoteConfig.fetchAndActivate();
 
   await appGetItInitial();
 
