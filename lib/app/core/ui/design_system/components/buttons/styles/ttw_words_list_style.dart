@@ -23,6 +23,10 @@ class TtwWordsListStyle implements ITtwButtonStyle {
   @override
   bool get isFullWidth => true;
 
+  final bool? isCorretWord;
+
+  TtwWordsListStyle({this.isCorretWord});
+
   @override
   Widget buildChild(String text,
       {IconData? icon, required BuildContext context}) {
@@ -30,7 +34,7 @@ class TtwWordsListStyle implements ITtwButtonStyle {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(text, style: textStyle(context)),
-        const Icon(
+        if (isCorretWord == true) const Icon(
           FontAwesomeIcons.solidSmile,
           color: TtwDsColors.ttwWhite,
           size: 16,

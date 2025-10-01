@@ -16,7 +16,7 @@ class WordsDatasourceImpl implements WordsDatasource {
       log('Fetching words from page: $page with limit: $limit');
       
       final result = await _httpCore
-          .get('http://localhost:3000/words-info?page=$page&limit=$limit');
+          .get('http://192.168.1.21:3000/words-info?page=$page&limit=$limit');
 
       final data = result.data;
 

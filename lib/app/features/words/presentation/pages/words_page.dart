@@ -42,10 +42,10 @@ class _WordsPageState extends State<WordsPage> {
 
     await _controller.fetchWords(page: nextPage);
     await _controller.toSendLastPage(nextPage);
-    
+
     setState(() {
       _lastPage = nextPage;
-      _correctWordsThisPage.clear(); 
+      _correctWordsThisPage.clear();
     });
   }
 
@@ -69,7 +69,9 @@ class _WordsPageState extends State<WordsPage> {
                                   padding: const EdgeInsets.only(bottom: 20),
                                   child: TtwDsButton(
                                     text: word.palavra,
-                                    style: TtwWordsListStyle(),
+                                    style: TtwWordsListStyle(
+                                        isCorretWord: _correctWordsThisPage
+                                            .contains(word.palavra)),
                                     action: () async {
                                       final wrongOptions = _controller
                                           .generateWrongTranslationsFor(word);

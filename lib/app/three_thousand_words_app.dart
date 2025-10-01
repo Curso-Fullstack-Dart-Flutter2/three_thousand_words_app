@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:three_thousand_words/app/core/database/sqlite_adm_connection.dart';
+import 'package:three_thousand_words/app/core/navigator/ttw_navigator.dart';
 import 'package:three_thousand_words/app/core/ui/three_thousand_ui_config.dart';
 import 'package:three_thousand_words/app/features/auth/login/presentation/pages/login_page.dart';
 import 'package:three_thousand_words/app/features/auth/register/presentation/pages/register_page.dart';
@@ -37,6 +38,7 @@ class _ThreeThousandWordsAppState extends State<ThreeThousandWordsApp> {
       debugShowCheckedModeBanner: false,
       initialRoute: '/splash',
       theme: ThreeThousandUiConfig.whiteTheme,
+      navigatorKey: TtwNavigator.navigatorKey,
       darkTheme: ThreeThousandUiConfig.darkTheme,
       themeMode: ThemeMode.dark,
       routes: {

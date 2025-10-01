@@ -33,7 +33,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void dispose() {
     _isLoggedSubscription?.cancel();
-    _controller.isLogged.close();
+    // _controller.isLogged.close();
     super.dispose();
   }
 

@@ -42,24 +42,25 @@ class LoginController {
     _errorController.add(null);
 
     try {
-      await _userUsecase.googleLogin();
+      final user = await _userUsecase.googleLogin();
+      log('User logged in with Google: ${user?.email}');
       if (!_isDisposed) _loadingController.add(false);
     } on AuthException catch (authError, stackTrace) {
       log('Auth error in controller to login with Google',
           error: authError, stackTrace: stackTrace);
 
-      _userUsecase.googleLogout();
+      // _userUsecase.googleLogout();
 
       if (!_isDisposed) _errorController.add(authError.message);
     } on Exception catch (error, stackTrace) {
       log('Error in controller to login with Google',
           error: error, stackTrace: stackTrace);
 
-      _userUsecase.googleLogout();
+      // _userUsecase.googleLogout();
 
       if (!_isDisposed) _errorController.add(error.toString());
     } finally {
-      _userUsecase.googleLogout();
+      // _userUsecase.googleLogout();
       if (!_isDisposed) _loadingController.add(false);
     }
   }

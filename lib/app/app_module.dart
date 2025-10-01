@@ -2,6 +2,7 @@ import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:get_it/get_it.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:three_thousand_words/app/core/auth/ttw_auth_provider.dart';
 import 'package:three_thousand_words/app/core/database/sqlite_connection_factory.dart';
 import 'package:three_thousand_words/app/core/http/http_core.dart';
 import 'package:three_thousand_words/app/core/http/http_core_impl.dart';
@@ -73,6 +74,11 @@ Future<void> appGetItInitial() async {
       () => UserRepositoryImpl(userDatasource: getIt()));
   getIt.registerLazySingleton<UserUsecase>(
       () => UserUsecaseImpl(userRepository: getIt()));
+
+  getIt.registerLazySingleton(() => TtwAuthProvider(
+        firebaseAuth: getIt(),
+        userUsecase: getIt(),
+      ));
 
   getIt.registerLazySingleton(() => RegisterController(userUsecase: getIt()));
   getIt.registerLazySingleton(() => LoginController(userUsecase: getIt()));
