@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:logger/logger.dart';
 import 'package:three_thousand_words/app/core/http/http_core.dart';
 import 'package:three_thousand_words/app/core/http/interceptors.dart';
@@ -11,10 +12,14 @@ class HttpCoreImpl implements HttpCore {
   HttpCoreImpl()
       : _dio = Dio(
           BaseOptions(
-              headers: {'Content-Type': 'application/json; charset=UTF-8'},
-              responseType: ResponseType.json,
-              sendTimeout: const Duration(seconds: 10),
-              receiveTimeout: const Duration(seconds: 10)),
+            headers: {
+              'Content-Type': 'application/json; charset=UTF-8',
+              'x-api-key': dotenv.env['x-api-key'] ?? '',
+            },
+            responseType: ResponseType.json,
+            sendTimeout: const Duration(seconds: 10),
+            receiveTimeout: const Duration(seconds: 10),
+          ),
         )..interceptors.addAll([LoggerInterceptor()]);
 
   @override

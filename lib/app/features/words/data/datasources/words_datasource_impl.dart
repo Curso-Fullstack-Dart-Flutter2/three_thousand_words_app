@@ -12,11 +12,15 @@ class WordsDatasourceImpl implements WordsDatasource {
   @override
   Future<PaginateWordsResponseModel> fetchWords(
       {required int page, int limit = 5}) async {
+    const baseUrl =
+        'https://three-thousand-word-pkxgkddqr-filipes-projects-54e64146.vercel.app';
+
     try {
       log('Fetching words from page: $page with limit: $limit');
-      
-      final result = await _httpCore
-          .get('http://192.168.1.21:3000/words-info?page=$page&limit=$limit');
+
+      final result = await _httpCore.get(
+        '$baseUrl/words-info?page=$page&limit=$limit',
+      );
 
       final data = result.data;
 
