@@ -4,6 +4,7 @@ import 'package:three_thousand_words/app/core/ui/design_system/components/button
 import 'package:three_thousand_words/app/core/ui/design_system/components/buttons/styles/ttw_words_list_style.dart';
 import 'package:three_thousand_words/app/core/ui/design_system/components/buttons/ttw_ds_button.dart';
 import 'package:three_thousand_words/app/core/ui/design_system/components/ttw_ds_app_bar.dart';
+import 'package:three_thousand_words/app/features/success/presentation/pages/success_page.dart';
 import 'package:three_thousand_words/app/features/words/presentation/widgets/ttw_ds_quiz_dialog.dart';
 import 'package:three_thousand_words/app/features/words/domain/entities/paginate_words_response_entity.dart';
 import 'package:three_thousand_words/app/features/words/presentation/controllers/words_controller.dart';
@@ -38,7 +39,18 @@ class _WordsPageState extends State<WordsPage> {
   }
 
   void _loadMoreWords() async {
+    const totalPages = 3000 ~/ 5;
     final nextPage = _lastPage + 1;
+
+    if (nextPage > totalPages) {
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const SuccessPage()),
+        );
+      }
+      return;
+    }
 
     await _controller.fetchWords(page: nextPage);
     await _controller.toSendLastPage(nextPage);
