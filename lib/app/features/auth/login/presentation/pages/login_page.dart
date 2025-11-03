@@ -75,18 +75,17 @@ class _LoginPageState extends State<LoginPage> {
                       action: () async {
                         final isFormValid =
                             _formKey.currentState?.validate() ?? false;
-                
+
                         if (isFormValid) {
                           await _controller.login(
                             email: _email.text,
                             password: _password.text,
                           );
-                
+
                           if (mounted) {
                             WidgetsBinding.instance.addPostFrameCallback(
                               (_) {
-                                Navigator.of(context)
-                                    .pushNamedAndRemoveUntil(
+                                Navigator.of(context).pushNamedAndRemoveUntil(
                                   '/home',
                                   (route) => false,
                                 );
@@ -111,15 +110,25 @@ class _LoginPageState extends State<LoginPage> {
                     borderRadius: BorderRadius.circular(5),
                     borderSide: BorderSide.none,
                   ),
-                  onPressed: () {
-                    _controller.googleLogin();
+                  onPressed: () async {
+                    await _controller.googleLogin();
+
+                    if (mounted) {
+                      WidgetsBinding.instance.addPostFrameCallback(
+                        (_) {
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                            '/home',
+                            (route) => false,
+                          );
+                        },
+                      );
+                    }
                   },
                 ),
               ),
               TextButton(
                 child: const Text('Não possui conta, cadastre-se'),
-                onPressed: () =>
-                    Navigator.of(context).pushNamed('/register'),
+                onPressed: () => Navigator.of(context).pushNamed('/register'),
               ),
             ],
           ),

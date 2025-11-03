@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
               ),
               const SizedBox(height: 16),
               TtwDsButton(
-                text: '🔁 Revisar palavras difíceis',
+                text: '🔁 Revisar palavras acertadas',
                 style: TtwChoiceButtonHomeStyle(
                     customButtomColor: TtwDsColors.ttwOrange),
                 action: () => Navigator.pushNamed(context, '/words_local_db'),
