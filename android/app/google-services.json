@@ -7,17 +7,25 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:384908406460:android:1a7e241645eeb72a90eab9",
+        "mobilesdk_app_id": "1:384908406460:android:721e74d4d0034d9f90eab9",
         "android_client_info": {
-          "package_name": "com.example.three_thousand_words"
+          "package_name": "com.filipehaniel.three_thousand_words"
         }
       },
       "oauth_client": [
         {
-          "client_id": "384908406460-dg6cpbt10uogudd5i8pjb69ls2oivclf.apps.googleusercontent.com",
+          "client_id": "384908406460-613jc21a4n72d874c4m3smdjscdsdo7k.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.three_thousand_words",
+            "package_name": "com.filipehaniel.three_thousand_words",
+            "certificate_hash": "b25f2bbe854a29cf550f30c64a2d34713c9a14cc"
+          }
+        },
+        {
+          "client_id": "384908406460-i1k5s04fonmqg6qa8ah9rettrb12umfu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.filipehaniel.three_thousand_words",
             "certificate_hash": "8a12dcfeaad40eb9f782a6481d2d630435a62877"
           }
         },

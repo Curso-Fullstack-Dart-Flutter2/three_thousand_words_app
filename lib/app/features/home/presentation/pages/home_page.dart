@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '👋 Olá! ${user!.displayName ?? ''}',
+                '👋 Olá! ${user?.displayName ?? ''}',
                 style: TtwDsAppTextStyles.ttwStyleTitle(context),
               ),
               Text(
