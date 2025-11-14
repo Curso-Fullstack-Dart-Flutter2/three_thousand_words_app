@@ -44,8 +44,8 @@ class _LoginPageState extends State<LoginPage> {
                   borderSide: BorderSide.none,
                 ),
                 onPressed: () async {
-                   await _controller.googleLogin();
-      
+                  await _controller.googleLogin();
+
                   if (mounted) {
                     WidgetsBinding.instance.addPostFrameCallback(
                       (_) {
